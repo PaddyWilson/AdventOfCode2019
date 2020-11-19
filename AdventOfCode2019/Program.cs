@@ -12,6 +12,7 @@ namespace AdventOfCode2019
 		static readonly string Day1Input = Folder + @"day1-1.txt";
 		static readonly string Day2Input = Folder + @"day2-1.txt";
 		static readonly string Day3Input = Folder + @"day3-1.txt";
+		static readonly string Day5Input = Folder + @"day5-1.txt";
 
 		static void Main(string[] args)
 		{
@@ -21,21 +22,26 @@ namespace AdventOfCode2019
 			int output = 0;
 			string input = "";
 
-			input = Day1Input;
-			answer = 3331849;
-			output = Day1.Result1(input);
-			Console.WriteLine("Day 1. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
-			answer = 4994898;
-			output = Day1.Result2(input);
-			Console.WriteLine("Day 1. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+			int i = Math.Abs(386792);
+			while (i >= 10)
+				i /= 10;
 
-			input = Day2Input;
-			answer = 3101844;
-			output = Day2.Result1(input);
-			Console.WriteLine("Day 2. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
-			answer = 8478;
-			output = Day2.Result2(input);
-			Console.WriteLine("Day 2. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			//input = Day1Input;
+			//answer = 3331849;
+			//output = Day1.Result1(input);
+			//Console.WriteLine("Day 1. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			//answer = 4994898;
+			//output = Day1.Result2(input);
+			//Console.WriteLine("Day 1. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			//input = Day2Input;
+			//answer = 3101844;
+			//output = Day2.Result1(input);
+			//Console.WriteLine("Day 2. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			//answer = 8478;
+			//output = Day2.Result2(input);
+			//Console.WriteLine("Day 2. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
 			//it takes a long time
 			//input = Day3Input;
@@ -46,13 +52,21 @@ namespace AdventOfCode2019
 			//output = Day3.Result2(input);
 			//Console.WriteLine("Day 3. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
-			input = "245182-790572";
-			answer = 1099;
-			output = Day4.Result1(input);
-			Console.WriteLine("Day 4. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			//input = "245182-790572";
+			//answer = 1099;
+			//output = Day4.Result1(input);
+			//Console.WriteLine("Day 4. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			//answer = 710;
+			//output = Day4.Result2(input);
+			//Console.WriteLine("Day 4. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			input = Day5Input;
+			answer = 3122865;
+			output = Day5.Result1(input);
+			Console.WriteLine("Day 5. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
 			answer = 710;
-			output = Day4.Result2(input);
-			Console.WriteLine("Day 4. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+			output = Day5.Result2(input);
+			Console.WriteLine("Day 5. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
 
 
