@@ -23,33 +23,10 @@ namespace AdventOfCode2019
 			input[1] = 12;
 			input[2] = 2;
 
-			int opCode = 0;
-			int position = 0;
+			IntCode pc = new IntCode();
+			//pc.Run(input);
 
-			opCode = input[position];
-			while (opCode != 99)
-			{
-				int one, two, three;
-				one = input[position + 1];
-				two = input[position + 2];
-				three = input[position + 3];
-
-				switch (opCode)
-				{
-					case 1://add
-						input[three] = input[one] + input[two];
-						break;
-					case 2://multiply
-						input[three] = input[one] * input[two];
-						break;
-				}
-
-				//move to next opCode
-				position += 4;
-				opCode = input[position];
-			}
-
-			return input[0];
+			return pc.Run(input);
 		}
 
 
@@ -63,58 +40,20 @@ namespace AdventOfCode2019
 			{
 				memory[i] = int.Parse(inputFile[i]);
 			}
-			int[] backup = new int[memory.Length];
-			Array.Copy(memory, backup, memory.Length);
+
+			IntCode comp = new IntCode();
 
 			int answer = 0;
-
 			int noun = 0;
 			while (noun <= 99)
 			{
 				int verb = 0;
 				while (verb <= 99)
 				{
-					Array.Copy(backup, memory, memory.Length);
-
 					memory[1] = noun;
 					memory[2] = verb;
 
-					int opCode = 0;
-					int instructionAddress = 0;
-
-					while (opCode != 99)
-					{
-						int nounAddress, verbAddress, outputAddress;
-						opCode = memory[instructionAddress];
-						nounAddress = memory[instructionAddress + 1];
-						verbAddress = memory[instructionAddress + 2];
-						outputAddress = memory[instructionAddress + 3];
-
-						if (outputAddress >= memory.Length - 1)
-							break;
-
-						switch (opCode)
-						{
-							case 1://add
-								memory[outputAddress] = memory[nounAddress] + memory[verbAddress];
-								break;
-							case 2://multiply
-								memory[outputAddress] = memory[nounAddress] * memory[verbAddress];
-								break;
-						}
-						//move to next opCode
-						if (opCode != 99)
-							instructionAddress += 4;
-						else
-							break;
-
-						if (instructionAddress + 1 >= memory.Length - 1 ||
-							instructionAddress + 2 >= memory.Length - 1 ||
-							instructionAddress + 3 >= memory.Length - 1)
-							break;
-					}
-
-					if (memory[0] == 19690720)
+					if (comp.Run(memory) == 19690720)
 					{
 						answer = 100 * noun + verb;
 						return answer;

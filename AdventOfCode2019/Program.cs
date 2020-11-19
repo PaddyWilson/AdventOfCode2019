@@ -3,7 +3,7 @@ using System.IO;
 
 namespace AdventOfCode2019
 {
-	
+
 
 
 	class Program
@@ -17,14 +17,45 @@ namespace AdventOfCode2019
 		{
 			Console.WriteLine("Advent Of Code 2019");
 
-			Console.WriteLine("Day 1. Answer 1:{0}, Answer 2:{1}",
-				Day1.Result1(Day1Input), Day1.Result2(Day1Input));
+			int answer = 0;
+			int output = 0;
+			string input = "";
 
-			Console.WriteLine("Day 2. Answer 1:{0}, Answer 2:{1}",
-				Day2.Result1(Day2Input), Day2.Result2(Day2Input));
+			input = Day1Input;
+			answer = 3331849;
+			output = Day1.Result1(input);
+			Console.WriteLine("Day 1. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			answer = 4994898;
+			output = Day1.Result2(input);
+			Console.WriteLine("Day 1. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
-			Console.WriteLine("Day 3. Answer 1:{0}, Answer 2:{1}",
-				Day3.Result1(Day3Input), Day3.Result2(Day3Input));
+			input = Day2Input;
+			answer = 3101844;
+			output = Day2.Result1(input);
+			Console.WriteLine("Day 2. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			answer = 8478;
+			output = Day2.Result2(input);
+			Console.WriteLine("Day 2. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			//it takes a long time
+			//input = Day3Input;
+			//answer = 709;
+			//output = Day3.Result1(input);
+			//Console.WriteLine("Day 3. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			//answer = 13836;
+			//output = Day3.Result2(input);
+			//Console.WriteLine("Day 3. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			input = "245182-790572";
+			answer = 1099;
+			output = Day4.Result1(input);
+			Console.WriteLine("Day 4. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			answer = 710;
+			output = Day4.Result2(input);
+			Console.WriteLine("Day 4. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+
+
 
 			Console.ReadLine();
 		}

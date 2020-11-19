@@ -25,8 +25,8 @@ namespace AdventOfCode2019
 			string[] wire2 = input[1].Split(',');
 
 
-			Dictionary<string, char> w1 = PlaceWires(wire1);
-			Dictionary<string, char> w2 = PlaceWires(wire2);
+			Dictionary<string, int> w1 = PlaceWires(wire1);
+			Dictionary<string, int> w2 = PlaceWires(wire2);
 
 			List<string> intersects = new List<string>();
 			foreach (var item1 in w1)
@@ -41,7 +41,7 @@ namespace AdventOfCode2019
 						intersects.Add(item1.Key);
 				}
 			}
-			
+
 			//int size = 500;
 			//char[,] vis = new char[size, size];
 			//int offSetY = size / 2;
@@ -60,46 +60,67 @@ namespace AdventOfCode2019
 					lowest = temp;
 			}
 
-			//if (size < 600)
-			//	using (System.IO.StreamWriter filef =
-			//	new System.IO.StreamWriter(@"C:\Users\GGGGG\Desktop\output.txt", false))
-			//	{
-			//		for (int x = 0; x < size; x++)
-			//		{
-			//			filef.WriteLine();
-			//			for (int y = 0; y < size; y++)
-			//			{
-			//				if (vis[x, y] == 0)
-			//				{
-			//					filef.Write(' ');
-			//				}
-			//				else
-			//					filef.Write(vis[x, y]);
-			//			}
-			//		}
-			//		filef.WriteLine("End");
-			//	}
-
-
 			return lowest;
 		}
 
 		public static int Result2(string file)
 		{
+			string[] input = File.ReadAllLines(file);
 
-			return 0;
+			//string[] wire1 = "R8,U5,L5,D3".Split(',');
+			//string[] wire2 = "U7,R6,D4,L4".Split(',');
+
+			//string[] wire1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72".Split(',');
+			//string[] wire2 = "U62,R66,U55,R34,D71,R55,D58,R83".Split(',');
+
+			//string[] wire1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51".Split(',');
+			//string[] wire2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7".Split(',');
+
+			string[] wire1 = input[0].Split(',');
+			string[] wire2 = input[1].Split(',');
+
+			Dictionary<string, int> w1 = PlaceWires(wire1);
+			Dictionary<string, int> w2 = PlaceWires(wire2);
+
+			//List<string> intersects = new List<string>();
+
+			int lowest = int.MaxValue - 1;
+			foreach (var item1 in w1)
+			{
+				foreach (var item2 in w2)
+				{
+					//don't include the starting point
+					if (item1.Key == "0,0" && item2.Key == "0,0")
+						continue;
+
+					if (item1.Key == item2.Key)
+					{
+						//int x = int.Parse(item.Split(',')[0]);
+						//int y = int.Parse(item.Split(',')[1]);
+
+						//vis[offSetX + x, offSetY + y] = item;
+
+						int temp = item1.Value +item2.Value;
+						if (temp < lowest)
+							lowest = temp;
+					}
+				}
+			}
+
+			return lowest;
 		}
 
-		static Dictionary<string,char> PlaceWires(string[] wire)
+		static Dictionary<string, int> PlaceWires(string[] wire)
 		{
 			//starting position
 			int x = 0;
 			int y = 0;
 
-			Dictionary<string, char> wireView = new Dictionary<string, char>();
+			Dictionary<string, int> wireView = new Dictionary<string, int>();
 
-			wireView[PosString(x, y)] = 'O';
+			//wireView.Add(PosString(x, y));
 
+			int length = 0;
 			foreach (var item in wire)
 			{
 				char direction = item[0];
@@ -110,6 +131,7 @@ namespace AdventOfCode2019
 				while (amount != 0)
 				{
 					amount--;
+					length++;
 					switch (direction)
 					{
 						case 'D': x++; break;
@@ -121,7 +143,9 @@ namespace AdventOfCode2019
 					}
 
 					if (!wireView.ContainsKey(PosString(x, y)))
-						wireView[PosString(x, y)] = '.';
+						wireView.Add(PosString(x, y), length);
+					//else
+						//wireView.Add(PosString(x, y), length);
 				}
 			}
 			return wireView;
