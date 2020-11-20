@@ -23,10 +23,10 @@ namespace AdventOfCode2019
 			input[1] = 12;
 			input[2] = 2;
 
-			IntCode pc = new IntCode();
+			IntCode pc = new IntCode(input);
 			//pc.Run(input);
 
-			return pc.Run(input);
+			return pc.Run();
 		}
 
 
@@ -41,7 +41,7 @@ namespace AdventOfCode2019
 				memory[i] = int.Parse(inputFile[i]);
 			}
 
-			IntCode comp = new IntCode();
+
 
 			int answer = 0;
 			int noun = 0;
@@ -53,7 +53,9 @@ namespace AdventOfCode2019
 					memory[1] = noun;
 					memory[2] = verb;
 
-					if (comp.Run(memory) == 19690720)
+					IntCode comp = new IntCode(memory);
+
+					if (comp.Run() == 19690720)
 					{
 						answer = 100 * noun + verb;
 						return answer;

@@ -19,9 +19,10 @@ namespace AdventOfCode2019
 
 			//special instructions
 
-			IntCode pc = new IntCode();
-			pc.input = 1;
-			pc.Run(input);
+			IntCode pc = new IntCode(input);
+			int[] arr = {1};
+			pc.SetInput(arr);
+			pc.Run();
 
 			return pc.output;
 		}
@@ -49,9 +50,10 @@ namespace AdventOfCode2019
 
 			//special instructions
 
-			IntCode pc = new IntCode();
-			pc.input = 5;
-			pc.Run(input);
+			IntCode pc = new IntCode(input);
+			int[] arr = { 5 };
+			pc.SetInput(arr);
+			pc.Run();
 
 			return pc.output;
 		}

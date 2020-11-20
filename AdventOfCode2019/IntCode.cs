@@ -9,22 +9,61 @@ namespace AdventOfCode2019
 {
 	public class IntCode
 	{
-		public int input = 0;
+		public List<int> input;
+		int inputCount = 0;
 		public int output = 0;
+		
+		bool running = false;
+		bool isPaused = false;
 
-		public int Run(int[] code)
+		int[] memory;
+		int[] backupMemory;
+		int instructionAddress = 0;
+
+		public IntCode(int[] code)
 		{
-			int[] memory = new int[code.Length];
+			memory = new int[code.Length];
+			backupMemory = new int[code.Length];
 			Array.Copy(code, memory, code.Length);
+			Array.Copy(code, backupMemory, code.Length);
+			
+			input = new List<int>();
+		}
 
-			int param1Add = 0, param2Add = 0, param3Add = 0;
-			int opCode = 0;
-			int instructionAddress = 0;
+		public void Reset() 
+		{
+			Array.Copy(backupMemory, memory, backupMemory.Length);
+			running = false;
+			isPaused = false;
+			instructionAddress = 0;
+			inputCount = 0;
+		}
 
-			while (opCode != 99)
+		public void SetInput(int[] input)
+		{
+			this.input = new List<int>(input);
+			inputCount = 0;
+		}
+
+		public void AddToInput(int input)
+		{
+			this.input.Add(input);
+		}
+
+		public bool IsRunning() { return running; }
+
+		public int Run(bool pauseOnOutput = false)
+		{
+			running = true;
+			isPaused = false;
+			while (running && !isPaused)
 			{
-				opCode = memory[instructionAddress];
-				param1Add = memory[instructionAddress + 1];
+				isPaused = false;
+
+				int param1Add = 0, param2Add = 0, param3Add = 0;
+				int opCode = memory[instructionAddress];
+				if (instructionAddress + 1 < memory.Length)
+					param1Add = memory[instructionAddress + 1];
 				if (instructionAddress + 2 < memory.Length)
 					param2Add = memory[instructionAddress + 2];
 				if (instructionAddress + 3 < memory.Length)
@@ -48,10 +87,6 @@ namespace AdventOfCode2019
 				}
 
 				//for testing
-				//				if (param2Add > memory.Length || param2Add < 0) param2Add = 0;
-				//				if (param3Add > memory.Length || param3Add < 0) param3Add = 0;
-
-
 				//				foreach (var item in memory)
 				//				{
 				//					Console.Write(item + ",");
@@ -62,6 +97,9 @@ namespace AdventOfCode2019
 
 				switch (opCode)
 				{
+					case 99:
+						running = false; instructionAddress += 1;
+						break;
 					case 1://add
 						memory[param3Add] = memory[param1Add] + memory[param2Add]; instructionAddress += 4;
 						break;
@@ -69,12 +107,13 @@ namespace AdventOfCode2019
 						memory[param3Add] = memory[param1Add] * memory[param2Add]; instructionAddress += 4;
 						break;
 					case 3://input
-						memory[param1Add] = input; instructionAddress += 2;
+						memory[param1Add] = input[inputCount]; inputCount++; instructionAddress += 2;
 						break;
 					case 4://output
 						output = memory[param1Add]; instructionAddress += 2;
+						if (pauseOnOutput) 
+							isPaused = true;
 						break;
-
 					case 5://jump-if-true
 						if (memory[param1Add] != 0)
 							instructionAddress = memory[param2Add];
@@ -102,9 +141,7 @@ namespace AdventOfCode2019
 						instructionAddress += 4;
 						break;
 				}
-				opCode = memory[instructionAddress];
 			}
-
 			return memory[0];
 		}
 
