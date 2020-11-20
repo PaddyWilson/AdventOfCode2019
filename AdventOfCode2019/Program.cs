@@ -65,10 +65,10 @@ namespace AdventOfCode2019
 			Console.WriteLine("Day 5. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
 			input = Day6Input;
-			answer = 3122865;
+			answer = 140608;
 			output = Day6.Result1(input);
 			Console.WriteLine("Day 6. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
-			answer = 773660;
+			answer = 337;
 			output = Day6.Result2(input);
 			Console.WriteLine("Day 6. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
