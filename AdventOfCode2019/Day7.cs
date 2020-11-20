@@ -77,7 +77,7 @@ namespace AdventOfCode2019
 			int[] inputCommands = new int[inputFile.Length];
 			for (int i = 0; i < inputFile.Length; i++)
 				inputCommands[i] = int.Parse(inputFile[i]);
-			int highest = 0;					
+			int highest = 0;
 
 			for (int one = 5; one < 10; one++)
 				for (int two = 5; two < 10; two++)

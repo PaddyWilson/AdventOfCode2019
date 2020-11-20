@@ -15,7 +15,7 @@ namespace AdventOfCode2019
 		static readonly string Day5Input = Folder + @"day5-1.txt";
 		static readonly string Day6Input = Folder + @"day6-1.txt";
 		static readonly string Day7Input = Folder + @"day7-1.txt";
-		static readonly string Day8Input = Folder + @"day5-1.txt";
+		static readonly string Day8Input = Folder + @"day8-1.txt";
 		static readonly string Day9Input = Folder + @"day9-1.txt";
 		static readonly string Day10Input = Folder + @"day10-1.txt";
 		static readonly string Day11Input = Folder + @"day11-1.txt";
@@ -81,13 +81,21 @@ namespace AdventOfCode2019
 			//output = Day6.Result2(input);
 			//Console.WriteLine("Day 6. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
-			input = Day7Input;
+			//input = Day7Input;
 			//answer = 77500;
 			//output = Day7.Result1(input);
 			//Console.WriteLine("Day 7. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
-			answer = 22476942;
-			output = Day7.Result2(input);
-			Console.WriteLine("Day 7. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+			//answer = 22476942;
+			//output = Day7.Result2(input);
+			//Console.WriteLine("Day 7. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			input = Day8Input;
+			answer = 2064;
+			output = Day8.Result1(input);
+			Console.WriteLine("Day 8. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			answer = 0;
+			output = Day8.Result2(input);
+			Console.WriteLine("Day 8. This is a picture that says:KAUZA, Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
 			Console.ReadLine();
 		}
