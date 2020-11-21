@@ -32,6 +32,10 @@ namespace AdventOfCode2019
 			int output = 0;
 			string input = "";
 
+			long asdfasdf = 1125899906842624;
+			Console.WriteLine(long.MaxValue);
+			Console.WriteLine(asdfasdf);
+
 			//input = Day1Input;
 			//answer = 3331849;
 			//output = Day1.Result1(input);
@@ -96,6 +100,14 @@ namespace AdventOfCode2019
 			answer = 0;
 			output = Day8.Result2(input);
 			Console.WriteLine("Day 8. This is a picture that says:KAUZA, Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
+
+			input = Day9Input;
+			answer = 77500;
+			output = Day9.Result1(input);
+			Console.WriteLine("Day 9. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
+			answer = 22476942;
+			output = Day9.Result2(input);
+			Console.WriteLine("Day 9. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 
 			Console.ReadLine();
 		}

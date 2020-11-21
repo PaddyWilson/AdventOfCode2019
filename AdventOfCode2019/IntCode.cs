@@ -12,13 +12,14 @@ namespace AdventOfCode2019
 		public List<int> input;
 		int inputCount = 0;
 		public int output = 0;
-		
+
 		bool running = false;
 		bool isPaused = false;
 
 		int[] memory;
 		int[] backupMemory;
 		int instructionAddress = 0;
+		int relativeBase = 0;
 
 		public IntCode(int[] code)
 		{
@@ -26,17 +27,18 @@ namespace AdventOfCode2019
 			backupMemory = new int[code.Length];
 			Array.Copy(code, memory, code.Length);
 			Array.Copy(code, backupMemory, code.Length);
-			
+
 			input = new List<int>();
 		}
 
-		public void Reset() 
+		public void Reset()
 		{
 			Array.Copy(backupMemory, memory, backupMemory.Length);
 			running = false;
 			isPaused = false;
 			instructionAddress = 0;
 			inputCount = 0;
+			relativeBase = 0;
 		}
 
 		public void SetInput(int[] input)
@@ -60,6 +62,7 @@ namespace AdventOfCode2019
 			{
 				isPaused = false;
 
+				//position mode DEFAULT
 				int param1Add = 0, param2Add = 0, param3Add = 0;
 				int opCode = memory[instructionAddress];
 				if (instructionAddress + 1 < memory.Length)
@@ -71,47 +74,62 @@ namespace AdventOfCode2019
 
 				if (opCode > 99)
 				{
-					if (opCode.ToString().Length > 2)
-						if ('1' == string.Concat(opCode.ToString().Reverse())[2])
+					string reversedOp = string.Concat(opCode.ToString().Reverse());
+					//first param
+					if (reversedOp.Length > 2)
+						//immediate mode = 1
+						if ('1' == reversedOp[2])
 							param1Add = instructionAddress + 1;
+						//relative mode = 2
+						else if ('2' == reversedOp[2])
+							param1Add = relativeBase + memory[instructionAddress + 1];
 
-					if (opCode.ToString().Length > 3)
-						if ('1' == string.Concat(opCode.ToString().Reverse())[3])
+					//second param
+					if (reversedOp.Length > 3)
+						if ('1' == reversedOp[3])
 							param2Add = instructionAddress + 2;
+						//relative mode = 2
+						else if ('2' == reversedOp[3])
+							param1Add = relativeBase + memory[instructionAddress + 2];
 
-					if (opCode.ToString().Length > 4)
-						if ('1' == string.Concat(opCode.ToString().Reverse())[4])
+					//third param
+					if (reversedOp.Length > 4)
+						if ('1' == reversedOp[4])
 							param3Add = instructionAddress + 3;
+						//relative mode = 2
+						else if ('2' == reversedOp[4])
+							param1Add = relativeBase + memory[instructionAddress + 3];
 
+					//get base opCode
 					opCode = int.Parse(opCode.ToString().Remove(0, opCode.ToString().Length - 2));
 				}
 
-				//for testing
-				//				foreach (var item in memory)
-				//				{
-				//					Console.Write(item + ",");
-				//				}
-				//Console.WriteLine();
-				//				Console.WriteLine("data {0},{1},{2},{3} : address {4},{5},{6},{7} : ins {8}", memory[instructionAddress], memory[param1Add], memory[param2Add], memory[param3Add], opCode, param1Add, param2Add, param3Add, instructionAddress);
-				//				Console.ReadKey();
 
+
+				//run the instuction
 				switch (opCode)
 				{
-					case 99:
-						running = false; instructionAddress += 1;
+					case 99://halt
+						running = false; 
+						instructionAddress += 1;
 						break;
 					case 1://add
-						memory[param3Add] = memory[param1Add] + memory[param2Add]; instructionAddress += 4;
+						memory[param3Add] = memory[param1Add] + memory[param2Add]; 
+						instructionAddress += 4;
 						break;
 					case 2://multiply
-						memory[param3Add] = memory[param1Add] * memory[param2Add]; instructionAddress += 4;
+						memory[param3Add] = memory[param1Add] * memory[param2Add]; 
+						instructionAddress += 4;
 						break;
 					case 3://input
-						memory[param1Add] = input[inputCount]; inputCount++; instructionAddress += 2;
+						memory[param1Add] = input[inputCount]; 
+						inputCount++; 
+						instructionAddress += 2;
 						break;
 					case 4://output
-						output = memory[param1Add]; instructionAddress += 2;
-						if (pauseOnOutput) 
+						output = memory[param1Add]; 
+						instructionAddress += 2;
+						if (pauseOnOutput)
 							isPaused = true;
 						break;
 					case 5://jump-if-true
@@ -139,6 +157,10 @@ namespace AdventOfCode2019
 						else
 							memory[param3Add] = 0;
 						instructionAddress += 4;
+						break;
+					case 9://relative base
+						relativeBase += memory[param1Add];
+						instructionAddress += 2;
 						break;
 				}
 			}
