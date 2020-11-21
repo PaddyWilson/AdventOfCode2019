@@ -5,59 +5,59 @@ namespace AdventOfCode2019
 {
 	internal class Day7
 	{
-		internal static int Result1(string input)
+		internal static long Result1(string input)
 		{
 			string[] inputFile = File.ReadAllLines(input);
 			inputFile = inputFile[0].Split(',');//only one line
 
 			//inputFile = "3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0".Split(',');
 
-			int[] inputCommands = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
+			long[] inputCommands = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
 			{
-				inputCommands[i] = int.Parse(inputFile[i]);
+				inputCommands[i] = long.Parse(inputFile[i]);
 			}
 
 			IntCode cpu = new IntCode(inputCommands);
 
 			// this is so dum but works great :)
 			// should probably have brackets
-			int highest = 0;
-			for (int one = 0; one < 5; one++)
-				for (int two = 0; two < 5; two++)
+			long highest = 0;
+			for (long one = 0; one < 5; one++)
+				for (long two = 0; two < 5; two++)
 					if (one != two)
-						for (int three = 0; three < 5; three++)
+						for (long three = 0; three < 5; three++)
 							if (one != two && one != three && two != three)
-								for (int four = 0; four < 5; four++)
+								for (long four = 0; four < 5; four++)
 									if (one != two && one != three && one != four && two != three && two != four && three != four)
-										for (int five = 0; five < 5; five++)
+										for (long five = 0; five < 5; five++)
 											if (one != two && one != three && one != four && one != five
 												&& two != three && two != four && two != five
 												&& three != four && three != five && four != five)
 											{
-												int temp = 0;
+												long temp = 0;
 												cpu.Reset();
-												cpu.SetInput(new int[] { one, temp });
+												cpu.SetInput(new long[] { one, temp });
 												cpu.Run();
 												temp = cpu.output;
 
 												cpu.Reset();
-												cpu.SetInput(new int[] { two, temp });
+												cpu.SetInput(new long[] { two, temp });
 												cpu.Run();
 												temp = cpu.output;
 
 												cpu.Reset();
-												cpu.SetInput(new int[] { three, temp });
+												cpu.SetInput(new long[] { three, temp });
 												cpu.Run();
 												temp = cpu.output;
 
 												cpu.Reset();
-												cpu.SetInput(new int[] { four, temp });
+												cpu.SetInput(new long[] { four, temp });
 												cpu.Run();
 												temp = cpu.output;
 
 												cpu.Reset();
-												cpu.SetInput(new int[] { five, temp });
+												cpu.SetInput(new long[] { five, temp });
 												cpu.Run();
 												temp = cpu.output;
 
@@ -67,26 +67,26 @@ namespace AdventOfCode2019
 			return highest;
 		}
 
-		internal static int Result2(string input)
+		internal static long Result2(string input)
 		{
 			string[] inputFile = File.ReadAllLines(input);
 			inputFile = inputFile[0].Split(',');//only one line
 
 			//inputFile = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5".Split(',');
 
-			int[] inputCommands = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
-				inputCommands[i] = int.Parse(inputFile[i]);
-			int highest = 0;
+			long[] inputCommands = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
+				inputCommands[i] = long.Parse(inputFile[i]);
+			long highest = 0;
 
-			for (int one = 5; one < 10; one++)
-				for (int two = 5; two < 10; two++)
+			for (long one = 5; one < 10; one++)
+				for (long two = 5; two < 10; two++)
 					if (one != two)
-						for (int three = 5; three < 10; three++)
+						for (long three = 5; three < 10; three++)
 							if (one != two && one != three && two != three)
-								for (int four = 5; four < 10; four++)
+								for (long four = 5; four < 10; four++)
 									if (one != two && one != three && one != four && two != three && two != four && three != four)
-										for (int five = 5; five < 10; five++)
+										for (long five = 5; five < 10; five++)
 											if (one != two && one != three && one != four && one != five
 												&& two != three && two != four && two != five
 												&& three != four && three != five && four != five)
@@ -97,13 +97,13 @@ namespace AdventOfCode2019
 												IntCode cpu4 = new IntCode(inputCommands);
 												IntCode cpu5 = new IntCode(inputCommands);
 
-												cpu1.SetInput(new int[] { one });
-												cpu2.SetInput(new int[] { two });
-												cpu3.SetInput(new int[] { three });
-												cpu4.SetInput(new int[] { four });
-												cpu5.SetInput(new int[] { five });
+												cpu1.SetInput(new long[] { one });
+												cpu2.SetInput(new long[] { two });
+												cpu3.SetInput(new long[] { three });
+												cpu4.SetInput(new long[] { four });
+												cpu5.SetInput(new long[] { five });
 
-												int temp = 0;
+												long temp = 0;
 												do
 												{
 													cpu1.AddToInput(temp);

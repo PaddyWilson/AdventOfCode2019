@@ -9,26 +9,26 @@ namespace AdventOfCode2019
 {
 	public class IntCode
 	{
-		public List<int> input;
-		int inputCount = 0;
-		public int output = 0;
+		public List<long> input;
+		long inputCount = 0;
+		public long output = 0;
 
 		bool running = false;
 		bool isPaused = false;
 
-		int[] memory;
-		int[] backupMemory;
-		int instructionAddress = 0;
-		int relativeBase = 0;
+		long[] memory;
+		long[] backupMemory;
+		long instructionAddress = 0;
+		long relativeBase = 0;
 
-		public IntCode(int[] code)
+		public IntCode(long[] code)
 		{
-			memory = new int[code.Length];
-			backupMemory = new int[code.Length];
+			memory = new long[code.Length];
+			backupMemory = new long[code.Length];
 			Array.Copy(code, memory, code.Length);
 			Array.Copy(code, backupMemory, code.Length);
 
-			input = new List<int>();
+			input = new List<long>();
 		}
 
 		public void Reset()
@@ -41,20 +41,20 @@ namespace AdventOfCode2019
 			relativeBase = 0;
 		}
 
-		public void SetInput(int[] input)
+		public void SetInput(long[] input)
 		{
-			this.input = new List<int>(input);
+			this.input = new List<long>(input);
 			inputCount = 0;
 		}
 
-		public void AddToInput(int input)
+		public void AddToInput(long input)
 		{
 			this.input.Add(input);
 		}
 
 		public bool IsRunning() { return running; }
 
-		public int Run(bool pauseOnOutput = false)
+		public long Run(bool pauseOnOutput = false)
 		{
 			running = true;
 			isPaused = false;
@@ -63,8 +63,8 @@ namespace AdventOfCode2019
 				isPaused = false;
 
 				//position mode DEFAULT
-				int param1Add = 0, param2Add = 0, param3Add = 0;
-				int opCode = memory[instructionAddress];
+				long param1Add = 0, param2Add = 0, param3Add = 0;
+				long opCode = memory[instructionAddress];
 				if (instructionAddress + 1 < memory.Length)
 					param1Add = memory[instructionAddress + 1];
 				if (instructionAddress + 2 < memory.Length)
@@ -101,7 +101,7 @@ namespace AdventOfCode2019
 							param1Add = relativeBase + memory[instructionAddress + 3];
 
 					//get base opCode
-					opCode = int.Parse(opCode.ToString().Remove(0, opCode.ToString().Length - 2));
+					opCode = long.Parse(opCode.ToString().Remove(0, opCode.ToString().Length - 2));
 				}
 
 
@@ -122,7 +122,7 @@ namespace AdventOfCode2019
 						instructionAddress += 4;
 						break;
 					case 3://input
-						memory[param1Add] = input[inputCount]; 
+						memory[param1Add] = input[(int)inputCount]; 
 						inputCount++; 
 						instructionAddress += 2;
 						break;

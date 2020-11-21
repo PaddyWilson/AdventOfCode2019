@@ -8,15 +8,15 @@ namespace AdventOfCode2019
 {
 	public class Day2
 	{
-		public static int Result1(string file)
+		public static long Result1(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 			inputFile = inputFile[0].Split(',');//only one line
 
-			int[] input = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
+			long[] input = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
 			{
-				input[i] = int.Parse(inputFile[i]);
+				input[i] = long.Parse(inputFile[i]);
 			}
 
 			//special instructions
@@ -30,24 +30,24 @@ namespace AdventOfCode2019
 		}
 
 
-		public static int Result2(string file)
+		public static long Result2(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 			inputFile = inputFile[0].Split(',');//only one line
 
-			int[] memory = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
+			long[] memory = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
 			{
-				memory[i] = int.Parse(inputFile[i]);
+				memory[i] = long.Parse(inputFile[i]);
 			}
 
 
 
-			int answer = 0;
-			int noun = 0;
+			long answer = 0;
+			long noun = 0;
 			while (noun <= 99)
 			{
-				int verb = 0;
+				long verb = 0;
 				while (verb <= 99)
 				{
 					memory[1] = noun;

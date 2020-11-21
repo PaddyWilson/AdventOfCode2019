@@ -8,7 +8,7 @@ namespace AdventOfCode2019
 {
 	public class Day3
 	{
-		public static int Result1(string file)
+		public static long Result1(string file)
 		{
 			string[] input = File.ReadAllLines(file);
 
@@ -25,8 +25,8 @@ namespace AdventOfCode2019
 			string[] wire2 = input[1].Split(',');
 
 
-			Dictionary<string, int> w1 = PlaceWires(wire1);
-			Dictionary<string, int> w2 = PlaceWires(wire2);
+			Dictionary<string, long> w1 = PlaceWires(wire1);
+			Dictionary<string, long> w2 = PlaceWires(wire2);
 
 			List<string> intersects = new List<string>();
 			foreach (var item1 in w1)
@@ -42,20 +42,20 @@ namespace AdventOfCode2019
 				}
 			}
 
-			//int size = 500;
+			//long size = 500;
 			//char[,] vis = new char[size, size];
-			//int offSetY = size / 2;
-			//int offSetX = size / 2;
-			int lowest = int.MaxValue - 1;
+			//long offSetY = size / 2;
+			//long offSetX = size / 2;
+			long lowest = long.MaxValue - 1;
 
 			foreach (var item in intersects)
 			{
-				int x = int.Parse(item.Split(',')[0]);
-				int y = int.Parse(item.Split(',')[1]);
+				long x = long.Parse(item.Split(',')[0]);
+				long y = long.Parse(item.Split(',')[1]);
 
 				//vis[offSetX + x, offSetY + y] = item;
 
-				int temp = Math.Abs(x - 0) + Math.Abs(y - 0);
+				long temp = Math.Abs(x - 0) + Math.Abs(y - 0);
 				if (temp < lowest)
 					lowest = temp;
 			}
@@ -63,7 +63,7 @@ namespace AdventOfCode2019
 			return lowest;
 		}
 
-		public static int Result2(string file)
+		public static long Result2(string file)
 		{
 			string[] input = File.ReadAllLines(file);
 
@@ -79,12 +79,12 @@ namespace AdventOfCode2019
 			string[] wire1 = input[0].Split(',');
 			string[] wire2 = input[1].Split(',');
 
-			Dictionary<string, int> w1 = PlaceWires(wire1);
-			Dictionary<string, int> w2 = PlaceWires(wire2);
+			Dictionary<string, long> w1 = PlaceWires(wire1);
+			Dictionary<string, long> w2 = PlaceWires(wire2);
 
 			//List<string> intersects = new List<string>();
 
-			int lowest = int.MaxValue - 1;
+			long lowest = long.MaxValue - 1;
 			foreach (var item1 in w1)
 			{
 				foreach (var item2 in w2)
@@ -95,12 +95,12 @@ namespace AdventOfCode2019
 
 					if (item1.Key == item2.Key)
 					{
-						//int x = int.Parse(item.Split(',')[0]);
-						//int y = int.Parse(item.Split(',')[1]);
+						//long x = long.Parse(item.Split(',')[0]);
+						//long y = long.Parse(item.Split(',')[1]);
 
 						//vis[offSetX + x, offSetY + y] = item;
 
-						int temp = item1.Value +item2.Value;
+						long temp = item1.Value +item2.Value;
 						if (temp < lowest)
 							lowest = temp;
 					}
@@ -110,23 +110,23 @@ namespace AdventOfCode2019
 			return lowest;
 		}
 
-		static Dictionary<string, int> PlaceWires(string[] wire)
+		static Dictionary<string, long> PlaceWires(string[] wire)
 		{
 			//starting position
-			int x = 0;
-			int y = 0;
+			long x = 0;
+			long y = 0;
 
-			Dictionary<string, int> wireView = new Dictionary<string, int>();
+			Dictionary<string, long> wireView = new Dictionary<string, long>();
 
 			//wireView.Add(PosString(x, y));
 
-			int length = 0;
+			long length = 0;
 			foreach (var item in wire)
 			{
 				char direction = item[0];
-				int amount = int.Parse(item.Substring(1, item.Length - 1));
-				int tempX = x;
-				int tempY = y;
+				long amount = long.Parse(item.Substring(1, item.Length - 1));
+				long tempX = x;
+				long tempY = y;
 
 				while (amount != 0)
 				{
@@ -152,7 +152,7 @@ namespace AdventOfCode2019
 		}
 
 
-		static string PosString(int x, int y)
+		static string PosString(long x, long y)
 		{
 			return x + "," + y;
 		}

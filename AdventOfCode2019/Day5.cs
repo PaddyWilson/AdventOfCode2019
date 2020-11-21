@@ -5,29 +5,29 @@ namespace AdventOfCode2019
 {
 	public class Day5
 	{
-		public static int Result1(string file)
+		public static long Result1(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 			inputFile = inputFile[0].Split(',');//only one line
 
 
-			int[] input = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
+			long[] input = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
 			{
-				input[i] = int.Parse(inputFile[i]);
+				input[i] = long.Parse(inputFile[i]);
 			}
 
 			//special instructions
 
 			IntCode pc = new IntCode(input);
-			int[] arr = {1};
+			long[] arr = {1};
 			pc.SetInput(arr);
 			pc.Run();
 
 			return pc.output;
 		}
 
-		public static int Result2(string file)
+		public static long Result2(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 			inputFile = inputFile[0].Split(',');//only one line
@@ -42,16 +42,16 @@ namespace AdventOfCode2019
 
 			//inputFile = "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99".Split(',');//works
 
-			int[] input = new int[inputFile.Length];
-			for (int i = 0; i < inputFile.Length; i++)
+			long[] input = new long[inputFile.Length];
+			for (long i = 0; i < inputFile.Length; i++)
 			{
-				input[i] = int.Parse(inputFile[i]);
+				input[i] = long.Parse(inputFile[i]);
 			}
 
 			//special instructions
 
 			IntCode pc = new IntCode(input);
-			int[] arr = { 5 };
+			long[] arr = { 5 };
 			pc.SetInput(arr);
 			pc.Run();
 

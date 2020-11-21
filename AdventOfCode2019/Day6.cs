@@ -16,7 +16,7 @@ namespace AdventOfCode2019
 			public bool Visited;
 		}
 
-		internal static int Result1(string file)
+		internal static long Result1(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 
@@ -28,10 +28,10 @@ namespace AdventOfCode2019
 				orbits.Add(split[1], split[0]);
 			}
 
-			int countOfOrbits = 0;
+			long countOfOrbits = 0;
 			foreach (var item in orbits)
 			{
-				int countTemp = 1;
+				long countTemp = 1;
 				string currentShip = item.Value;
 				while (currentShip != "COM")
 				{
@@ -44,7 +44,7 @@ namespace AdventOfCode2019
 			return countOfOrbits;
 		}
 
-		internal static int Result2(string file)
+		internal static long Result2(string file)
 		{
 			string[] inputFile = File.ReadAllLines(file);
 
@@ -98,7 +98,7 @@ namespace AdventOfCode2019
 			return path.Count - 2;
 		}
 
-		static int FindPath(Dictionary<string, Ship> orbits, Stack<Ship> path, string currentShip)
+		static long FindPath(Dictionary<string, Ship> orbits, Stack<Ship> path, string currentShip)
 		{
 			if (currentShip == "SAN") return -1;//found ship
 
@@ -110,7 +110,7 @@ namespace AdventOfCode2019
 			foreach (var item in orbits[currentShip].Orbiters)
 			{
 				if (currentShip == item) continue;//don't loop back
-				int result = 0;
+				long result = 0;
 				if (orbits[item].Visited != true)
 					result = FindPath(orbits, path, item);
 
