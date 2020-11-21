@@ -24,7 +24,7 @@ namespace AdventOfCode2019
 			pc.SetInput(arr);
 			pc.Run();
 
-			return pc.output;
+			return pc.output[pc.output.Count - 1];
 		}
 
 		public static long Result2(string file)
@@ -55,7 +55,7 @@ namespace AdventOfCode2019
 			pc.SetInput(arr);
 			pc.Run();
 
-			return pc.output;
+			return pc.output[0];
 		}
 	}
 }

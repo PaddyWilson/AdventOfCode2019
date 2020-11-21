@@ -39,27 +39,27 @@ namespace AdventOfCode2019
 												cpu.Reset();
 												cpu.SetInput(new long[] { one, temp });
 												cpu.Run();
-												temp = cpu.output;
+												temp = cpu.output[cpu.output.Count - 1];
 
 												cpu.Reset();
 												cpu.SetInput(new long[] { two, temp });
 												cpu.Run();
-												temp = cpu.output;
+												temp = cpu.output[cpu.output.Count - 1];
 
 												cpu.Reset();
 												cpu.SetInput(new long[] { three, temp });
 												cpu.Run();
-												temp = cpu.output;
+												temp = cpu.output[cpu.output.Count - 1];
 
 												cpu.Reset();
 												cpu.SetInput(new long[] { four, temp });
 												cpu.Run();
-												temp = cpu.output;
+												temp = cpu.output[cpu.output.Count - 1];
 
 												cpu.Reset();
 												cpu.SetInput(new long[] { five, temp });
 												cpu.Run();
-												temp = cpu.output;
+												temp = cpu.output[cpu.output.Count - 1];
 
 												if (temp > highest)
 													highest = temp;
@@ -109,19 +109,19 @@ namespace AdventOfCode2019
 													cpu1.AddToInput(temp);
 													cpu1.Run(true);
 
-													cpu2.AddToInput(cpu1.output);
+													cpu2.AddToInput(cpu1.output[cpu1.output.Count - 1]);
 													cpu2.Run(true);
 
-													cpu3.AddToInput(cpu2.output);
+													cpu3.AddToInput(cpu2.output[cpu2.output.Count - 1]);
 													cpu3.Run(true);
 
-													cpu4.AddToInput(cpu3.output);
+													cpu4.AddToInput(cpu3.output[cpu3.output.Count - 1]);
 													cpu4.Run(true);
 
-													cpu5.AddToInput(cpu4.output);
+													cpu5.AddToInput(cpu4.output[cpu4.output.Count - 1]);
 													cpu5.Run(true);
 
-													temp = cpu5.output;
+													temp = cpu5.output[cpu5.output.Count - 1];
 												} while (cpu1.IsRunning());
 
 												if (temp > highest)
