@@ -109,7 +109,7 @@ namespace AdventOfCode2019
 			answer = 292;
 			output = Day10.Result1(input);
 			Console.WriteLine("Day 10. Answer 1:{0,10}, Correct?:{1}", output, (output == answer));
-			answer = 69256;
+			answer = 317;
 			output = Day10.Result2(input);
 			Console.WriteLine("Day 10. Answer 2:{0,10}, Correct?:{1}", output, (output == answer));
 

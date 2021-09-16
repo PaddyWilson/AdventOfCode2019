@@ -81,12 +81,6 @@ namespace AdventOfCode2019
 
 				long tempOP = opCode;
 
-				//for debug
-				if (opCode == 203)
-				{
-					int i = 1;
-				}
-
 				if (instructionAddress + 1 < memory.Length)
 					param1Add = memory[instructionAddress + 1];
 				if (instructionAddress + 2 < memory.Length)
